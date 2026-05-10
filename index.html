@@ -190,6 +190,34 @@ padding:10px;
 border-radius:50%;
 cursor:pointer;
 }
+
+footer{
+    padding: 30px 20px;
+    text-align: center;
+    background: rgba(255,255,255,0.05);
+    margin-top: 50px;
+}
+
+footer p{
+    margin-bottom: 15px;
+    font-size: 14px;
+}
+
+.social-links{
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.social-links a{
+    color: white;
+    text-decoration: none;
+    transition: 0.3s;
+}
+
+.social-links a:hover{
+    color: cyan;
+}
 </style></head><body><canvas id="particles"></canvas>
 
 <nav class="navbar">
@@ -249,6 +277,16 @@ cursor:pointer;
 <textarea name="message" placeholder="Your Message" required></textarea>
 <button type="submit">Send Message</button>
 </form>
+
+<footer>
+    <p>© 2026 Michael Portfolio | All Rights Reserved</p>
+
+    <div class="social-links">
+        <a href="#">GitHub</a>
+        <a href="#">WhatsApp</a>
+        <a href="#">Email</a>
+    </div>
+</footer>
 </section><div class="top-btn" onclick="scrollToTop()">⬆</div><script>
 // typing
 const text="Frontend Developer";
