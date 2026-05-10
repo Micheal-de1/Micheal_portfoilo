@@ -1,0 +1,301 @@
+<!DOCTYPE html><html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Modern Portfolio Level 2</title><style>
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+scroll-behavior:smooth;
+font-family:Arial, sans-serif;
+}
+
+body{
+background:#0f172a;
+color:#fff;
+overflow-x:hidden;
+transition:0.3s;
+}
+
+body.light{
+background:#f1f5f9;
+color:#0f172a;
+}
+
+/* PARTICLES BACKGROUND */
+#particles{
+position:fixed;
+top:0;
+left:0;
+width:100%;
+height:100%;
+z-index:-1;
+}
+
+/* NAVBAR */
+.navbar{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:15px 30px;
+background:#111827;
+position:fixed;
+top:0;
+width:100%;
+z-index:1000;
+}
+
+body.light .navbar{
+background:#fff;
+color:#000;
+}
+
+.navbar ul{
+display:flex;
+list-style:none;
+gap:20px;
+}
+
+.navbar a{
+color:inherit;
+text-decoration:none;
+}
+
+.navbar a.active{
+color:#38bdf8;
+}
+
+/* HERO */
+#home{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:120px 40px 60px;
+flex-wrap:wrap;
+}
+
+.hero-text h1{font-size:40px;}
+.hero-text h2{color:#38bdf8;}
+.hero-text p{opacity:0.8;}
+
+button{
+margin-top:15px;
+padding:10px 15px;
+border:none;
+border-radius:8px;
+cursor:pointer;
+background:#38bdf8;
+}
+
+.hero-image img{
+border-radius:50%;
+width:250px;
+}
+
+/* SECTIONS */
+section{
+padding:80px 40px;
+opacity:0;
+transform:translateY(40px);
+transition:0.6s ease;
+}
+
+section.show{
+opacity:1;
+transform:translateY(0);
+}
+
+#about,#goal,#contact{
+background:#111827;
+margin-top:20px;
+border-radius:10px;
+}
+
+body.light #about,
+body.light #goal,
+body.light #contact{
+background:#e2e8f0;
+}
+
+/* PROJECTS */
+.project-container{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+gap:20px;
+}
+
+.project-card{
+background:#1e293b;
+padding:20px;
+border-radius:12px;
+transition:0.3s;
+}
+
+.project-card:hover{
+transform:translateY(-8px);
+}
+
+body.light .project-card{
+background:#fff;
+color:#000;
+box-shadow:0 5px 15px rgba(0,0,0,0.1);
+}
+
+/* CONTACT FORM */
+form{
+display:flex;
+flex-direction:column;
+gap:10px;
+margin-top:10px;
+}
+
+input,textarea{
+padding:10px;
+border:none;
+border-radius:6px;
+}
+
+/* BUTTONS */
+.top-btn{
+position:fixed;
+bottom:20px;
+right:20px;
+background:#38bdf8;
+padding:10px;
+border-radius:50%;
+cursor:pointer;
+}
+</style></head><body><canvas id="particles"></canvas>
+
+<nav class="navbar">
+<h2>My Portfolio</h2>
+<ul>
+<li><a href="#home" class="active">Home</a></li>
+<li><a href="#about">About</a></li>
+<li><a href="#goal">Goal</a></li>
+<li><a href="#project">Projects</a></li>
+<li><a href="#contact">Contact</a></li>
+</ul>
+<button onclick="toggleTheme()">🌙</button>
+</nav><section id="home">
+<div class="hero-text">
+<h1>Hello, I'm Michael</h1>
+<h2>I am <span id="typing"></span></h2>
+<p>Frontend developer building modern websites.</p>
+<button onclick="downloadCV()">Download CV</button>
+</div>
+<div class="hero-image">
+<img src="https://picsum.photos/300" />
+</div>
+</section><section id="about">
+<h2>About Me</h2>
+<p>I am learning web development and building real projects.</p>
+</section><section id="goal">
+<h2>My Goal</h2>
+<p>Become a professional full-stack developer.</p>
+</section><section id="project">
+<h2>Projects</h2>
+<div class="project-container">
+<div class="project-card">Portfolio Website</div>
+<div class="project-card">Landing Page</div>
+<div class="project-card">UI Practice</div>
+</div>
+</section><section id="contact-form">
+<h2>Contact</h2>
+<p>Email: michealweijie@gmail.com</p><form onsubmit="sendMsg(event)">
+<input type="text" name="from_name" placeholder="Your Name" required>
+<input type="email" name="fron_email" placeholder="Your Email" required>
+<textarea name="message" placeholder="Your Message" required></textarea>
+<button type="submit">Send Message</button>
+</form>
+</section><div class="top-btn" onclick="scrollToTop()">⬆</div><script>
+// typing
+const text="Frontend Developer";
+let i=0;
+function type(){
+if(i<text.length){
+document.getElementById("typing").innerHTML=text.substring(0,i+1);
+i++;
+setTimeout(type,100);
+}}
+type();
+
+// scroll reveal
+const sections=document.querySelectorAll("section");
+window.addEventListener("scroll",()=>{
+sections.forEach(s=>{
+if(s.getBoundingClientRect().top<500){
+s.classList.add("show");
+}
+});
+});
+
+// theme
+function toggleTheme(){
+document.body.classList.toggle("light");
+}
+
+// CV download
+function downloadCV(){
+const a=document.createElement("a");
+a.href="https://example.com/cv.pdf";
+a.download="CV.pdf";
+a.click();
+}
+
+// contact
+function sendMsg(e){
+e.preventDefault();
+alert("Message sent (demo)");
+}
+
+// top button
+function scrollToTop(){window.scrollTo({top:0,behavior:"smooth"});}
+
+// particles (simple)
+const canvas=document.getElementById("particles");
+const ctx=canvas.getContext("2d");
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
+let dots=Array.from({length:50},()=>({x:Math.random()*canvas.width,y:Math.random()*canvas.height}));
+function draw(){
+ctx.clearRect(0,0,canvas.width,canvas.height);
+ctx.fillStyle="#38bdf8";
+dots.forEach(d=>{
+ctx.beginPath();
+ctx.arc(d.x,d.y,2,0,Math.PI*2);
+ctx.fill();
+});
+requestAnimationFrame(draw);
+}
+draw();
+</script>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+<script>
+emailjs.init("ajGjbr50ISCY5EX1");
+
+document
+.getElementById("contact-form")
+.addEventListener("submit", function(event){
+
+event.preventDefault();
+
+emailjs.sendForm(
+"service_8wbq9in",
+"template_0eui1aj",
+this
+)
+.then(() => {
+alert("Message Sent Successfully!");
+})
+.catch((error) => {
+alert("Failed to send message");
+console.log(error);
+});
+
+});
+</script>
+</body>
+</html>
